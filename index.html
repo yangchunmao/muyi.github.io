@@ -177,71 +177,10 @@
 <li>常用的通过<code>SVN</code>进行版本控制的开发模式有哪些?</li>
 <li>具体相关开发模式有哪些优点与缺点?</li>
 <li>目前项目下的SVN使用情况,存在哪些问题? 如何进行改进?</li>
-<li>应用改进后的开发流程,具体的实操步骤…</li>
-</ul>
-<h4 id="常用的开发模式"><a href="#常用的开发模式" class="headerlink" title="常用的开发模式"></a>常用的开发模式</h4><ul>
-<li>以<code>trunk</code>为主要开发目录</li>
-</ul>
-<p><img src="/img/svn图片/图片_trunk主干开发.png" alt="trunk集中式开发模式"></p>
-<p> 职责说明:</p>
-<ul>
-<li><code>Trunk</code>: 用于开发人员各版本开发提交代码</li>
-<li><code>Tag</code>: 用于记录和保存每个<code>release</code>的代码</li>
-<li><code>Branch</code>: 用于<code>bug fixing</code></li>
-</ul>
-<p>这种方式为<code>trunk</code>集中式开发模式;<br>一般来说,所有的开发都是基于<code>trunk</code>进行开发的,当一个版本开发告一个段落(经过开发,测试,文档,打包等)结束后,代码处于冻结状态(人为规定,可以通过<code>hook</code>进行管理, 如何通过通过<code>hook</code>管理?).此时应该基于当前冻结的代码库,打<code>tag</code>.<br>当下一个版本/阶段的开发任务开始,继续在<code>trunk</code>上进行开发.如此这样对新需求/任务进行迭代.<br>此时,如果发现上一个已发行版本(<code>Released Version</code>)有一些<code>bug</code>,或者一些很急迫的功能要求,而正在开发的版本无法满足时间要求(进行一系列测试、开发等),这时候就需要在上一个版本上进行修改了.应该基于发行版对应的<code>tag</code>,做相应的分支<code>branch</code>进行开发.当<code>bug</code>/需求修正完成(同样经过开发,测试等),然后<code>merge</code>到<code>trunk</code>等待下一次发布.<br>这是一种很标准的开发模式,很多的公司都是采用这种模式进行开发.<code>trunk</code>永远是开发的主要目录.</p>
-<ul>
-<li>以<code>branch</code>为主要开发目录</li>
-</ul>
-<p><img src="/img/svn图片/图片_branch分支开发.png" alt="branch分散式开发模式"></p>
-<p> 职责说明:</p>
-<ul>
-<li><code>Trunk</code>: 不承担具体的开发任务,只是承担版本发布</li>
-<li><code>Tag</code>: 用于记录和保存每个<code>release</code>的代码</li>
-<li><code>Branch</code>: 用于各版本开发目录,同时应对相应<code>bug fixing</code></li>
-</ul>
-<p>这种方式为<code>branch</code>分散式开始模式;<br>此模式中<code>trunk</code>不承担具体开发任务的,一个版本的开发任务在开始的时候,根据已经<code>released</code>的版本做新的开发<code>branch</code>,并且基于这个<code>branch</code>进行开发.当<code>branch</code>开发一个段落(经过开发,测试,文档,打包等),通过人工<code>merge</code>到<code>trunk</code>中进行版本发布,打<code>tag</code>.当下一个版本/阶段的开发任务开始,从当前<code>trunk</code>中打出另一个<code>branch</code>,进而对当前<code>branch</code>进行需求的迭代.更甚,如果当多个需求没有相关性时,可以同时打出多个<code>branch</code>并行开发迭代,这个可以再不影响其他团队的情况下,并行开发.当最后<code>merge</code>到<code>trunk</code>就会增加复杂度.<br>此时,如果发现上一个已发行版本有一些<code>bug</code>,或者一些很急迫的功能要求,还是在当前开发的<code>branch</code>上进行修改.但此时一定要注意如果当前分支的版本号已经低于<code>trunk</code>上的版本号,需要先合并<code>trunk</code>代码,再在<code>branch</code>上修改!</p>
-<h4 id="版本开发流程的优缺点"><a href="#版本开发流程的优缺点" class="headerlink" title="版本开发流程的优缺点"></a>版本开发流程的优缺点</h4><ul>
-<li>第一种开发模式(<code>trunk</code>集中式):<ul>
-<li>优点: 管理简单.</li>
-<li>缺点: 当开发模块比较多,开发人员/小团队比较多时,很容易产生冲突而影响对方的开发.因为所有的改动都有可能触碰到对方的改动.另外没法通过<code>merge</code>进行过滤提交发版,还有代码的人工审核.   </li>
-</ul>
-</li>
-<li>第二种开发模式(<code>branch</code>分散式):<ul>
-<li>优点: 各自开发独立, 不容易相互影响.</li>
-<li>缺点: 管理复杂, 如果<code>branch</code>比较多,那么merge`的时候很麻烦.这个很费人力.</li>
-</ul>
-</li>
-</ul>
-<h4 id="当前项目SVN应用情况-如何流程化"><a href="#当前项目SVN应用情况-如何流程化" class="headerlink" title="当前项目SVN应用情况,如何流程化"></a>当前项目<code>SVN</code>应用情况,如何流程化</h4><p>当前我们项目<code>SVN</code>的<code>trunk</code>已经弃用,在一个<code>branch</code>上进行全量的开发,所有开发人员基于此<code>branch</code>进行提交修改,会导致没法管控各个开发人员的提交情况;并且发布测试没有可用的分支进行发布;且没有稳定版本的<code>tag</code>留档.<br>基于当前的现状及问题,总结常用的开发模式,做如下惯例:</p>
-<ul>
-<li>基于当前<code>branch</code>的<code>HEAD revision</code>稳定版本做<code>tag</code>留档, 并以<code>tag</code>留档作为主要正式环境作为发版源</li>
-<li>以<code>tag</code>留档打出主要的开发<code>branch</code>,命名为<code>_development</code>,作为对标集中式开发模式的<code>trunk</code>.</li>
-<li>所有的基于<code>_development</code>分支的修改都经过测试等,验证需求完成.然后人工<code>merge</code>到<code>主branch</code>.</li>
-<li><code>merge</code>有2种类型,<code>merge a range of revisions</code>: 选择一个或多个修订<code>merge</code>到当前目录;<code>merge two different trees</code>: 当希望将两个不同分支的差异合并到工作副本中时,应该此类型.</li>
-<li>所有的<code>merge</code>都是把不同的<code>branch</code>或<code>branch</code>修订号合并到当前的<code>work coping</code>.</li>
-<li><code>_development branch</code>的开发告一段落(进行详细的测试等), <code>merge</code>到发版<code>branch</code>,确定版本后打相应的<code>tag</code>留档.至此,主线开发流程就终结.</li>
-<li>当已发布的<code>tag</code>存在问题,从当前<code>tag</code>打出分支进行<code>bug fixing</code>;如果需紧急修复,需<code>merge</code>到<code>tag</code>进行发布; 如果不是很紧急,可<code>merge</code>到<code>_development branch</code>进行下一次版本的发布。</li>
-</ul>
-<h4 id="主要的技术要点"><a href="#主要的技术要点" class="headerlink" title="主要的技术要点"></a>主要的技术要点</h4><p>主要通过客户端工具<code>TortoiseSVN</code>进行相应的操作,最主要涉及到2个主要操作:</p>
-<ul>
-<li>从某个<code>branch</code>打出<code>branch</code>或<code>tag</code>, <code>SVN</code>说白了就是目录管理,打分支/tag,其实就是目录拷贝<br><img src="/img/svn图片/图片_打出分支.png" alt="TortoiseSVN-Branch/Tag操作"></li>
-<li>把当前<code>branch</code>的某些改动<code>merge</code>当<code>work coping</code>,<code>merge</code>可以选择<code>merge</code>的深度,并可以进行<code>Test merge</code><br><img src="/img/svn图片/图片_merge修改.png" alt="TortoiseSVN-Merge...操作"><br><img src="/img/svn图片/图片_merge自定义.png" alt="TortoiseSVN-Merge自定义操作"></li>
-</ul>
-<p>至此,基本的<code>SVN</code>流程结构就理顺了,具体在后续的实际应用开发中出现其他问题再补充.另,<code>SVN</code>对开发文档方面的管理也要应用起来.文档的规范化(重点是建立相应文档的模板)更是需要很长的路要走!</p>
-<hr>
-<p>附录:</p>
-<ul>
-<li>主目录: <a href="https://ump.haier.net/svn/RRSKX/branches/branch_mecv_v2.0_finance" target="_blank" rel="noopener">https://ump.haier.net/svn/RRSKX/branches/branch_mecv_v2.0_finance</a></li>
-<li>开发目录: <a href="https://ump.haier.net/svn/RRSKX/branches/branch_mecv_v2.0_finance_development" target="_blank" rel="noopener">https://ump.haier.net/svn/RRSKX/branches/branch_mecv_v2.0_finance_development</a></li>
-<li>文档目录: <a href="https://ump.haier.net/svn/RRSKX/doc/财务端/2018" target="_blank" rel="noopener">https://ump.haier.net/svn/RRSKX/doc/财务端/2018</a></li>
-</ul>
-<hr>
-<p>思考:</p>
-<ul>
-<li>开发流程已经有了,那后续如何进行方便快捷的持续版本发布? 怎么实现通过<code>svn</code>、<code>docker</code>、<code>jenkins</code>进行持续集成?</li>
-</ul>
-
+<li>应用改进后的开发流程,具体的实操步骤…
+        
+          <a class="article-more-a" href="/2018/04/14/SVN/#more">more >></a>
+        
       
 
       
@@ -314,16 +253,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br>
+        
+          <a class="article-more-a" href="/2018/03/27/hello-world/#more">more >></a>
+        
       
 
       
@@ -386,96 +319,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h2><p>一个Markdown段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行。普通段落不该用空格或者制表符来缩进。</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>类Atx形式的标题语法，在行首插入1到6个[#],对应到标题的1到6阶，例如：</p>
-<p>###this is an H2</p>
-<p>####this is an H4<br>你也可以选择性的闭合类Atx样式的标题，为了美观，看起来会比较舒适，你可以在行尾加上#，例如:</p>
-<h5 id="this-is-an-h5"><a href="#this-is-an-h5" class="headerlink" title="this is an h5"></a>this is an h5</h5><h2 id="区块引用-Blockquotes"><a href="#区块引用-Blockquotes" class="headerlink" title="区块引用 Blockquotes"></a>区块引用 Blockquotes</h2><blockquote>
-<p>Markdown 区块引用是使用类似email中用&gt;的应用方式。在文件中建立一个区块引用，在每行的最前面加上&gt;.<br>Markdown 也允许你偷懒只在整个段落的第一行最前面加上&gt;.<br>区块引用可以嵌套</p>
-<blockquote>
-<p>引用内的引用，只要根据层次加上不同的数量的&gt;</p>
-</blockquote>
-</blockquote>
-<p>引用的区块内也可以使用其他的Markdown语法，包括标题、列表、代码区块等：</p>
-<blockquote>
-<h2 id="这是一个标题"><a href="#这是一个标题" class="headerlink" title="这是一个标题"></a>这是一个标题</h2><ol>
-<li>这是第一行列表项</li>
-<li>这是第二行列表项</li>
-</ol>
-<p>给出一些例子代码<br>     return shell_exec(“echo $input | $markdown_script”);</p>
-</blockquote>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>Markdown 支持有序列表和无序列表</p>
-<p>无序列表使用星号、加号或是减号作为列表标记。</p>
-<p>使用 * ：</p>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue</li>
-</ul>
-<p>等同于用 + ：</p>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue</li>
-</ul>
-<p>也等同于 - :</p>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue</li>
-</ul>
-<p>有序列表则使用数字接着一个英文句号：</p>
-<ol>
-<li>Bird</li>
-<li>McHale</li>
-<li>Parish</li>
-</ol>
-<p>如果列表项目可以包含多个段落，每个项目下的段落都必须缩进4个空格或是 1 个制表符：</p>
-<ol>
-<li>这是一个段落<br>这是一个段落</li>
-<li>这是一个段落</li>
-</ol>
-<p>如果要在列表中添加引用，那 &gt; 就需要缩进:</p>
-<ul>
-<li><p>A list item with a blockquote: </p>
-<blockquote>
-<p>这是一个引用</p>
-<blockquote>
-<p>这是一个引用</p>
-</blockquote>
-</blockquote>
-</li>
-</ul>
-<ol>
-<li><p>A list item with a blockquote:  </p>
-<blockquote>
-<p>这是一个引用</p>
-<blockquote>
-<p>这是一个引用</p>
-<blockquote>
-<p>这是一个引用</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-</ol>
-<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这样的区块我们不希望它以一般段落文件的方式去排版，而是照原来的样子、    </p>
-<p>要在Markdown中建立代码区块很简单，只要简单地缩进 4 个空格或 1 个制表符就可以：</p>
-<pre><code>这是一个普通的段落：
-
-    这是一个代码块。
-</code></pre><p>在代码块里面， &amp;、 &lt; 和 &gt; 会自动转化为 HTML 实体</p>
-<pre><code>&lt;div class=&quot;footer&quot;&gt;
-    &amp;copy; 2017 Ycm Corporation
-&lt;/div&gt;    
-</code></pre><h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>你可以在一行中用三个以上的星号、减号、底线来建立一个分割线，行内不能有其他东西。</p>
-<pre><code>* * * 
-*** 
-</code></pre><hr>
-<pre><code>- - -
-</code></pre><hr>
-<pre><code>-------------------------------------
-</code></pre><hr>
-
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>类Atx形式的标题语法，在行首插入1到6个[#],对应到标题的1到6阶，例如：<br>
+        
+          <a class="article-more-a" href="/2017/02/23/study-md/#more">more >></a>
+        
       
 
       
