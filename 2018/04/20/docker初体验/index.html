@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yangchunmao.github.io">
-  <title>Archives: 2018/4 | 木易的博客</title>
+  <title>docker初体验 | 木易的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个叫木易的人的简单思考, 加油坚持!!!">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="木易的博客">
-<meta property="og:url" content="https://yangchunmao.github.io/archives/2018/04/index.html">
+  <meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker初体验">
+<meta property="og:url" content="https://yangchunmao.github.io/2018/04/20/docker初体验/index.html">
 <meta property="og:site_name" content="木易的博客">
-<meta property="og:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yangchunmao.github.io/img/docker/图片_docker.jpg">
+<meta property="og:image" content="https://yangchunmao.github.io/img/docker/图片_docker镜像分层.png">
+<meta property="og:image" content="https://yangchunmao.github.io/img/docker/图片_docker容器.png">
+<meta property="og:image" content="https://yangchunmao.github.io/img/docker/图片_20180420211217.png">
+<meta property="og:image" content="https://yangchunmao.github.io/img/docker/微信图片_docker修改启动参数.png">
+<meta property="og:updated_time" content="2018-04-22T03:14:05.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="木易的博客">
-<meta name="twitter:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
+<meta name="twitter:title" content="docker初体验">
+<meta name="twitter:image" content="https://yangchunmao.github.io/img/docker/图片_docker.jpg">
   
     <link rel="alternative" href="/atom.xml" title="木易的博客" type="application/atom+xml">
   
@@ -148,36 +152,125 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="drafts-docker初体验" class="article article-type-drafts " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-drafts">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/20/docker初体验/" class="archive-article-date">
-  	<time datetime="2018-04-20T14:49:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/20/docker初体验/">docker初体验</a>
+    <h1 class="article-title" itemprop="name">
+      docker初体验
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/04/20/docker初体验/" class="archive-article-date">
+  	<time datetime="2018-04-20T14:49:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div align="center"><br>    <img src="/img/docker/图片_docker.jpg" width="1000px" height="500px" alt="docker形象图片" align="center"><br></div>
+
+<a id="more"></a>
+<blockquote>
+<p>在面向对象的设计中有一切都有对象的说法,对比<code>Docker</code>而言,对一切应用交付都应该为<code>Docker container</code>容器;在实际的应用中我们如何把<code>Docker</code>的独一无二的优势应用于我们自己的开发、测试、运维中来,<code>Now Just Do It</code>!</p>
+</blockquote>
+<h4 id="首先提出问题"><a href="#首先提出问题" class="headerlink" title="首先提出问题"></a>首先提出问题</h4><ul>
+<li><code>Docker</code>的主要概念理解及其真正的优势</li>
+<li><code>Docker</code>的三大组件,镜像<code>Image</code>、容器<code>Container</code>、仓库<code>Repository</code>基本的理解, 搭建基本的私有仓库</li>
+<li>进阶工具<code>Docker-compose</code>理解</li>
+<li><code>Docker-swarm</code>,<code>k8s</code>理解 </li>
+<li>如何应用当前我们的项目中</li>
+</ul>
+<h4 id="Docker理解"><a href="#Docker理解" class="headerlink" title="Docker理解"></a><code>Docker</code>理解</h4><p><code>Docker</code>从狭义上来讲就是一个进程,从广义上来讲是一个虚拟容器,类比虚拟机化技术;<code>Docker</code>进程和普通的进程没有任何区别,它就是一个普通的应用进程.不过是用来操作镜像文件的.所以<code>Docker</code>进程<code>+</code>构建的应用镜像文件就等于<code>Docker</code>容器.</p>
+<p><code>Docker</code>可以在容器内部快速自动化部署应用,并可以通过内核虚拟化技术(<code>namespace</code>及<code>cgroups</code>等)来提供容器的资源隔离与安全保障等.由于<code>Docker</code>通过操作系统层的虚拟化实现隔离,所以<code>Docker</code>容器在运行时,不需要类似虚拟机(<code>VM</code>)额外的操作系统开销,提高资源利用率,并且提升诸如<code>IO</code>等方面的性能.</p>
+<p><code>Docker</code>是一种超轻量级的虚拟机,它可以让你轻松完成持续集成,自动交付,自动部署,并且实现开发环境,测试环境,运维环境三方环境的真正同步.</p>
+<p><code>Docker</code>的真正优势:</p>
+<ul>
+<li>构建容易分发简单</li>
+<li>隔离应用解除依赖</li>
+<li>快速部署测完就销</li>
+</ul>
+<h4 id="镜像Docker-images"><a href="#镜像Docker-images" class="headerlink" title="镜像Docker images"></a>镜像<code>Docker images</code></h4><p>镜像<code>Docker images</code>, 就类似于<code>VM</code>虚拟机的快照,但可比快照轻量化多了.快照如何不懂?可以把<code>images</code>直接理解成一个文件夹.我们可以通过<code>ID</code>或者易识别的名字<code>+tag</code>来确认唯一的目标镜像.<code>ImagesID</code>是一个<code>64</code>位的字符,但是一般我们都用前<code>12</code>位就足够了.</p>
+<p>镜像是分层的、可复用的,就像积木一样, 所有要充分利用其镜像的特性.</p>
+<div align="center"><br>    <img src="/img/docker/图片_docker镜像分层.png" width="300px" height="400px" alt="docker镜像分层图片" align="center"><br></div>
+
+<h4 id="容器Docker-containers"><a href="#容器Docker-containers" class="headerlink" title="容器Docker containers"></a>容器<code>Docker containers</code></h4><p>容器<code>Docker containers</code>, 你可以从镜像中创建容器,就如从快照中创建虚拟机,不过这个过程更轻量,启动更快,秒启.具体的应用就是在容器中运行的.</p>
+<p>容器就是一个个对立的封闭的集装箱,但是也需要对外提供服务的.可以通过<code>-p 8081:80</code>把容器内的端口映射到宿主机的端口.</p>
+<div align="center"><br>    <img src="/img/docker/图片_docker容器.png" width="300px" height="400px" alt="docker容器图片" align="center"><br></div>
+
+<h4 id="仓库Docker-registeries"><a href="#仓库Docker-registeries" class="headerlink" title="仓库Docker registeries"></a>仓库<code>Docker registeries</code></h4><p>仓库<code>Docker registeries</code>, <code>Docker</code>仓库和存放集装箱的仓库是一样的,不过<code>Docker</code>使用来存放镜像的.仓库存在共有和私有之分,公有仓库<code>Docker hub</code>上提供了非常多的镜像文件,这些镜像直接<code>pull</code>就可以,你也可上传自己的镜像到公有仓库上.同时也可以自己搭建私有仓库用于团队项目管理.</p>
+<p>搭建简单的私有仓库</p>
+<pre><code>- 从公有仓库`Docker Hub`下载`registry`
+
+sudo docker pull registry
+
+- 存在问题, 需安装 `bind-utils`
+
+yum install bind-utils
+
+- 通过`dig`命令查询能够连接`registry-1.docker.io`的IP地址,然后修改`hosts
+
+dig @114.114.114.114 registry-1.docker.io
+vi /etc/hosts
+
+- `hosts`中添加可以的`IP`, `52.5.185.86 registry-1.docker.io`        
+- 启动`registry`,并把镜像目录挂在到本地的目录`/opt/data/registry`下,如下:
+
+docker run -d -p 5000:5000 -v /opt/data/registry:/tmp/registry registry
+
+- 接下来把`image`上传到私有仓库
+
+docker tag nginx 192.168.171.128:5000/nginx
+docker push 192.168.171.128:5000/nginx
+
+- 因为`Docker`从1.3.X之后,与`Docker registry`交互默认使用的是`https`,然而此处搭建的私有仓库只提供`http`服务,所以当与私有仓库交互时就会报上面的错误.为了解决这个问题需要在启动`Docker server`时增加参数默认使用`http`访问,修改为`docker`启动配置文件`/etc/sysconfig/docker`, 需添加一行
+![docker server参数修改](/img/docker/微信图片_docker修改启动参数.png)
+- 然后重启`Docker`
+
+service docker restart
+
+- `ps aux | grep docker` 可查看当前`docker`启动命令
+- 最后`push`到私有仓库
+</code></pre><p><code>Docker registry</code>错误图片<br><img src="/img/docker/图片_20180420211217.png" alt="docker registry错误"><br><code>Docker server</code>参数修改图片<br><img src="/img/docker/微信图片_docker修改启动参数.png" alt="docker server参数修改"></p>
+<p>至此,结合前面介绍的基本概念,我们可以将<code>Docker</code>的几个概念使用大致串起来,他们之间是如何运作的,也就是<code>Docker</code>的生命周期.</p>
+<ul>
+<li>开发构建镜像并将镜像<code>push</code>到<code>Docker</code>仓库</li>
+<li>测试或者运维从<code>Docker</code>仓库拷贝一份镜像到本地</li>
+<li>通过镜像文件开启<code>Docker</code>容器并提供服务</li>
+</ul>
+<h4 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker compose"></a><code>Docker compose</code></h4><p><code>Docker-compose</code>就如<code>compose</code>的字面意思组合一样,就像一个大箱子,可以把几个不相关的沙箱(如<code>Docker container</code>)组合起来,变成一个整体.</p>
+<p><code>Docker-compose</code>是<code>Docker</code>的一种编排服务,是一个用于在<code>Docker</code>上定义并运行复杂应用的工具,可以让用户在集群中部署分布式应用.</p>
+<p>通过<code>Docker-compose</code>用户可以很容易地用一个配置文件定义一个多容器的应用,然后使用一条指令安装这个应用的所有依赖,完成构建.<code>Docker-compose</code>解决了容器与容器之间如何管理编排的问题.</p>
+<p>安装<code>Docker-compose</code></p>
+<pre><code>#下载
+sudo curl -L https://github.com/docker/compose/releases/download/1.20.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+#安装
+chmod +x /usr/local/bin/docker-compose
+#查看版本
+docker-compose version
+#如果报下面的问题, 是GLIBC版本太低,
+docker-compose: /lib64/libc.so.6: version `GLIBC_2.14&apos; not found (required by /tmp/_MEIPbcTd8/libz.so.1)
+</code></pre><p>解决办法,查看此<a href="http://www.cnblogs.com/gw811/p/3676856.html" target="_blank" rel="noopener">链接</a></p>
+<h4 id="Docker-swarm与k8s"><a href="#Docker-swarm与k8s" class="headerlink" title="Docker swarm与k8s"></a><code>Docker swarm</code>与<code>k8s</code></h4><p><code>Docker swarm</code>与<code>k8s</code>都是用于容器集群化的编排工具.为什么要集群化(<code>Clustering</code>)?</p>
+<p>服务器集群由一组网络上相互连接的服务器组成,它们一起协同工作.一个集群和一堆服务器最显著的区别在于:<strong>集群能够像单个系统那样工作,同样提供高可用、负载均衡和并行处理.</strong></p>
+<p>想象,如何我们部署应用和服务时选择的是多个独立的服务器而非集群,资源的整体利用率则很难达到最优,因为我们无法提前知道如何分布这些应用才能达到资源利用的最大化.而且,应用使用资源的趋势是波动的,早上某些服务可能需要大量的内存,而下午使用量就降下来了.提前指定应用应该运行在哪个服务器上会丧失业务的弹性,当某个服务器宕机了, 我们不得不手工将受影响的应用迁移到其他服务器上.</p>
+<p>实现集群化后我们的思维方式就必须改变了：不再考虑一个一个的服务器，而是将集群看做是一个整体。</p>
+<p>部署应用时，我们只考虑需要多少内存和<code>CPU</code>，而不是考虑会使用那台服务器的内存和 <code>CPU</code>。我们不应该关心应用会被部署在哪里，我们关心的是运行这个应用需要哪些资源，然后将它部署到集群，集群管理程序（比如 <code>Docker Swarm</code>）会搞定这些细节。</p>
+<p>集群整体容量的调整是通过往集群中添加和删除主机节点实现的。但不管做怎样的操作，集群始终还是一个整体。</p>
+<p>后期,在继续从集群的方面去深入研究.</p>
+<h4 id="如何把Docker应用到目前我们的项目中"><a href="#如何把Docker应用到目前我们的项目中" class="headerlink" title="如何把Docker应用到目前我们的项目中"></a>如何把<code>Docker</code>应用到目前我们的项目中</h4><p>首先,仅仅是在测试环境进行试点,不应涉及到复杂的集群,搭建简单的单服务器的<code>Docker</code>环境, 建立一个私有仓库,存储适用于当前项目的<strong>应用镜像</strong>,通过容器化的<code>jenkins</code>连接<code>SVN</code>打包应用通过应用镜像发布应用服务.暂定如此方式简单的应用容器技术,后期具体的操作步骤也会记录下来.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,57 +282,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yangchunmao.github.io/2018/04/20/docker初体验/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/14/SVN/" class="archive-article-date">
-  	<time datetime="2018-04-14T14:09:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/14/SVN/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SVN 版本控制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/14/SVN/">SVN 版本控制</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -262,8 +404,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
