@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yangchunmao.github.io">
-  <title>Tag: md | 木易的博客</title>
+  <title>/lib64/libc.so.6: version `GLIBC_2.14` not found | 木易的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个叫木易的人的简单思考, 加油坚持!!!">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="木易的博客">
-<meta property="og:url" content="https://yangchunmao.github.io/tags/md/index.html">
+  <meta name="description" content="在centos6.9版本安装docker-compose时,碰到这个错误,通过升级到glibc2.14,但是Python的某个包确需要glibc2.17至更高的版本,最终升级至2.17才解决问题,特此记录升级的步骤.">
+<meta name="keywords" content="centos docker glibc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#x2F;lib64&#x2F;libc.so.6: version `GLIBC_2.14` not found">
+<meta property="og:url" content="https://yangchunmao.github.io/2018/05/02/lib64-libc-so-6-version-GLIBC-2-14-not-found/index.html">
 <meta property="og:site_name" content="木易的博客">
-<meta property="og:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
+<meta property="og:description" content="在centos6.9版本安装docker-compose时,碰到这个错误,通过升级到glibc2.14,但是Python的某个包确需要glibc2.17至更高的版本,最终升级至2.17才解决问题,特此记录升级的步骤.">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-02T10:44:33.293Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="木易的博客">
-<meta name="twitter:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
+<meta name="twitter:title" content="&#x2F;lib64&#x2F;libc.so.6: version `GLIBC_2.14` not found">
+<meta name="twitter:description" content="在centos6.9版本安装docker-compose时,碰到这个错误,通过升级到glibc2.14,但是Python的某个包确需要glibc2.17至更高的版本,最终升级至2.17才解决问题,特此记录升级的步骤.">
   
     <link rel="alternative" href="/atom.xml" title="木易的博客" type="application/atom+xml">
   
@@ -148,60 +149,188 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-lib64-libc-so-6-version-GLIBC-2-14-not-found" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/23/study-md/" class="archive-article-date">
-  	<time datetime="2017-02-23T01:46:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/23/study-md/">区块元素</a>
+    <h1 class="article-title" itemprop="name">
+      /lib64/libc.so.6: version `GLIBC_2.14` not found
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/02/lib64-libc-so-6-version-GLIBC-2-14-not-found/" class="archive-article-date">
+  	<time datetime="2018-05-02T10:42:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在<code>centos6.9</code>版本安装<code>docker-compose</code>时,碰到这个错误,通过升级到<code>glibc2.14</code>,但是<code>Python</code>的某个包确需要<code>glibc2.17</code>至更高的版本,最终升级至<code>2.17</code>才解决问题,特此记录升级的步骤.</p>
+</blockquote>
+<a id="more"></a>
+<ul>
+<li><p>先查看当前系统中的<code>GLIBC</code>版本,目前版本为<code>Centos6.9</code>, 可看到当前最高版本为<code>2.12</code></p>
+<pre><code>strings /lib64/libc.so.6 | grep GLIBC
+</code></pre></li>
+<li><p>当你准备升级<code>GLIBC</code>库之前,你要好好思考一下,你真的要升级<code>GLIBC</code>么?你知道你自己在做什么么? <code>GLIBC</code>是<code>linux</code>系统最底层的<code>API</code>,推荐看百度百科<a href="https://baike.baidu.com/item/glibc?fr=aladdin" target="_blank" rel="noopener">glibc</a></p>
+</li>
+<li><p>通过<code>ll</code>命令可以看到当前软链接实际的指向版本</p>
+<pre><code>ll /lib64/libc.so.6
+可有看到glibc是2.12版本,需要升级至少2.17
+</code></pre></li>
+<li><p>保守选择2.17,通过下载<code>glibc tar</code>包进行本地编译安装,具体步骤如下</p>
+<pre><code>wget http://ftp.gnu.org/gnu/glibc/glibc-2.17.tar.gz
+
+wget http://ftp.gnu.org/gnu/glibc/glibc-ports-2.15.tar.gz
+
+tar -xvf glibc-2.17.tar.gz
+
+tar -xvf glibc-ports-2.15.tar.gz
+
+mv glibc-ports-2.15 glibc-2.17/ports
+
+mkdir glibc-build-2.17
+
+cd glibc-build-2.17
+
+../glibc-2.15/configure  --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+
+如果当前环境没有 C++ 的编译环境,安装 gcc
+yum -y install gcc
+
+最后执行
+make
+
+make install
+</code></pre></li>
+<li><p>运行完后,通过<code>strings /lib64/libc.so.6 | grep GLIBC</code>当前支持的版本</p>
+</li>
+<li>可参考<a href="https://www.cnblogs.com/Yimi/p/7892007.html" target="_blank" rel="noopener">https://www.cnblogs.com/Yimi/p/7892007.html</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">md</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">centos docker glibc</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yangchunmao.github.io/2018/05/02/lib64-libc-so-6-version-GLIBC-2-14-not-found/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/05/01/阿里分布式数据库DRDS/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">阿里分布式数据库DRDS</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -224,9 +353,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
