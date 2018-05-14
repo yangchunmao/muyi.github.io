@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yangchunmao.github.io">
-  <title>阿里分布式数据库DRDS | 木易的博客</title>
+  <title>分布式系统初探 | 木易的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="当前项目中随着业务量的增加,数据越来越多,单机的MySQL数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库DRDS.  提出问题 DRDS真正解决的核心问题是什么 DRDS通过什么样的方式解决单机数据库的扩张问题 如何选择拆分键 后续业务如何很好的应用DRDS">
-<meta name="keywords" content="drds">
+  <meta name="description" content="现今互联网界,分布式系统和微服务架构盛行.一个简单操作,在服务端非常可能是由多个服务和数据库实例协同完成的.那么,为什么分布式系统可以替代集中式系统,称为当前业界发展的主流呢?  首先提出问题 分布式系统与集中式系统的优势在哪 分布式系统的CAP理论 分布式系统的有哪些方向性的研究">
+<meta name="keywords" content="分布式系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阿里分布式数据库DRDS">
-<meta property="og:url" content="https://yangchunmao.github.io/2018/05/01/阿里分布式数据库DRDS/index.html">
+<meta property="og:title" content="分布式系统初探">
+<meta property="og:url" content="https://yangchunmao.github.io/2018/05/14/分布式系统初探/index.html">
 <meta property="og:site_name" content="木易的博客">
-<meta property="og:description" content="当前项目中随着业务量的增加,数据越来越多,单机的MySQL数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库DRDS.  提出问题 DRDS真正解决的核心问题是什么 DRDS通过什么样的方式解决单机数据库的扩张问题 如何选择拆分键 后续业务如何很好的应用DRDS">
+<meta property="og:description" content="现今互联网界,分布式系统和微服务架构盛行.一个简单操作,在服务端非常可能是由多个服务和数据库实例协同完成的.那么,为什么分布式系统可以替代集中式系统,称为当前业界发展的主流呢?  首先提出问题 分布式系统与集中式系统的优势在哪 分布式系统的CAP理论 分布式系统的有哪些方向性的研究">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-01T11:01:12.874Z">
+<meta property="og:updated_time" content="2018-05-14T06:18:02.211Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="阿里分布式数据库DRDS">
-<meta name="twitter:description" content="当前项目中随着业务量的增加,数据越来越多,单机的MySQL数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库DRDS.  提出问题 DRDS真正解决的核心问题是什么 DRDS通过什么样的方式解决单机数据库的扩张问题 如何选择拆分键 后续业务如何很好的应用DRDS">
+<meta name="twitter:title" content="分布式系统初探">
+<meta name="twitter:description" content="现今互联网界,分布式系统和微服务架构盛行.一个简单操作,在服务端非常可能是由多个服务和数据库实例协同完成的.那么,为什么分布式系统可以替代集中式系统,称为当前业界发展的主流呢?  首先提出问题 分布式系统与集中式系统的优势在哪 分布式系统的CAP理论 分布式系统的有哪些方向性的研究">
   
     <link rel="alternative" href="/atom.xml" title="木易的博客" type="application/atom+xml">
   
@@ -149,20 +149,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-阿里分布式数据库DRDS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="drafts-分布式系统初探" class="article article-type-drafts " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      阿里分布式数据库DRDS
+      分布式系统初探
     </h1>
   
 
         
-        <a href="/2018/05/01/阿里分布式数据库DRDS/" class="archive-article-date">
-  	<time datetime="2018-05-01T11:00:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-01</time>
+        <a href="/2018/05/14/分布式系统初探/" class="archive-article-date">
+  	<time datetime="2018-05-14T06:16:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
 </a>
         
       </header>
@@ -170,37 +170,29 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>当前项目中随着业务量的增加,数据越来越多,单机的<code>MySQL</code>数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库<code>DRDS</code>.</p>
+<p>现今互联网界,分布式系统和微服务架构盛行.一个简单操作,在服务端非常可能是由多个服务和数据库实例协同完成的.那么,为什么分布式系统可以替代集中式系统,称为当前业界发展的主流呢?</p>
 </blockquote>
-<h4 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h4><ul>
-<li><code>DRDS</code>真正解决的核心问题是什么</li>
-<li><code>DRDS</code>通过什么样的方式解决单机数据库的扩张问题</li>
-<li>如何选择拆分键</li>
-<li>后续业务如何很好的应用<code>DRDS</code><a id="more"></a>
-</li>
+<h4 id="首先提出问题"><a href="#首先提出问题" class="headerlink" title="首先提出问题"></a>首先提出问题</h4><ul>
+<li>分布式系统与集中式系统的优势在哪</li>
+<li>分布式系统的<code>CAP</code>理论</li>
+<li>分布式系统的有哪些方向性的研究<a id="more"></a>
+<h4 id="分布式系统的优势"><a href="#分布式系统的优势" class="headerlink" title="分布式系统的优势"></a>分布式系统的优势</h4></li>
 </ul>
-<h4 id="DRDS真正解决的核心问题"><a href="#DRDS真正解决的核心问题" class="headerlink" title="DRDS真正解决的核心问题"></a><code>DRDS</code>真正解决的核心问题</h4><p><code>DRDS</code>是一个数据库的中间件,专注于解决单机关系型数据库扩展性问题.</p>
-<h4 id="DRDS通过什么样的方式解决单机数据库的扩张问题"><a href="#DRDS通过什么样的方式解决单机数据库的扩张问题" class="headerlink" title="DRDS通过什么样的方式解决单机数据库的扩张问题"></a><code>DRDS</code>通过什么样的方式解决单机数据库的扩张问题</h4><p><code>DRDS</code>兼容<code>MySQL</code>协议和语法,支持分库分表、平滑扩容、服务升降配,透明读写分离和分布式事务等特性,具备分布式数据库全生命周期的运维管控能力.</p>
-<h4 id="如何选择拆分键"><a href="#如何选择拆分键" class="headerlink" title="如何选择拆分键"></a>如何选择拆分键</h4><p>数据库产品都是有坑的,只是坑大坑小,<code>DRDS</code>分布式数据库,更具体的关注点在如何选择拆分键?</p>
-<p>数据库拆分的首要原则,就是要尽可能找到数据表中的数据在业务逻辑上的主体,并确定大部分(或核心的)数据库操作都是围绕这个主体的数据进行,然后可使用该主体对应的字段作为拆分键,进行分库分表.</p>
-<p><code>DRDS</code>这个产品的表结构设计和单机数据库有一个很重要的区别在于: 怎么拆.所以推荐看下<a href="https://help.aliyun.com/document_detail/51309.html" target="_blank" rel="noopener">如何选择拆分键</a>这个文档.</p>
-<p>具体相关的知识可看一下视频:</p>
+<p>在目前大数据互联网的前景下, 集中式系统已经触碰到摩尔定律的瓶颈;但是,分布式系统更最明显的优势可以用更廉价的、普通的机器来达成目标. 用数据致胜. 这就是分布式系统的目的, 用更多的机器来提供更好的可用性,处理更多的机器,突破单机的瓶颈.</p>
+<h4 id="分布式系统的CAP理论"><a href="#分布式系统的CAP理论" class="headerlink" title="分布式系统的CAP理论"></a>分布式系统的<code>CAP</code>理论</h4><p>从集中式向分布式的变革伴随着包括分布式网络、分布式事务和分布式数据一致性等在内的一系列的问题与挑战.提出了分布式系统的<code>CAP</code>理论</p>
 <ul>
-<li>分布式数据库导论<video src="https://tbm.alicdn.com/2wCjSV1r9NHo5R3KfYW/STDbZ3LrlM9pBTFUW7c@@sd.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"><br>your browser does not support the video tag<br></video></li>
-<li>用好<code>DRDS</code>最重要的一些原则<video src="https://tbm.alicdn.com/2wCjSV1r9NHo5R3KfYW/4zgPKqXY3wLrRKRZfKc@@sd.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"><br>your browser does not support the video tag<br></video></li>
-<li><code>DRDS</code>8个基础实操实验<video src="https://tbm.alicdn.com/2wCjSV1r9NHo5R3KfYW/ZmsannHbj89LqdMirq4@@sd.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"><br>your browser does not support the video tag<br></video>
-
-</li>
+<li>一致性(Consitency)<br>在分布式系统中的所有数据备份,在同一时刻是否为同样的值.(等同于所有节点访问同一份最新的数据副本)</li>
+<li>可用性(Availability)<br>在集群中一部分节点故障后,集群整体是否还能响应客户端的读写请求.(对数据更新具备高可用性)</li>
+<li>分区容错性(Partition tolerance)<br>以实际效果而言,分区相当于对通信的时限要求.系统如果不能在时限内达到数据一致性, 就意味着发生了分区的情况,必须就当前操作在<code>C</code>和<code>A</code>之间做出选择</li>
 </ul>
-<p>这3个视频,我个人觉得还是值得花时间去观看,并且最后一个视频会比官方<a href="https://help.aliyun.com/document_detail/50067.html" target="_blank" rel="noopener">快速入门系列文档</a>更加有针对性.</p>
-<h4 id="后续业务如何很好的应用DRDS"><a href="#后续业务如何很好的应用DRDS" class="headerlink" title="后续业务如何很好的应用DRDS`"></a>后续业务如何很好的应用<code></code>DRDS`</h4><p>当你了解这个产品最重要的点之后,接下来就是要应用到具体的项目中,但是初次使用,我们需要安装具体的相关步骤来进行.</p>
+<p>在分布式存储系统中, 最多只能实现上面的两点. 而由于当前的网络硬件肯定会出现延迟丢包等问题,所以分区容错性是我们必须需要实现的.所以我们只能在一致性和可用性之间衡量,没有<code>Nosql</code>系统能同时保证这三点.</p>
+<p>基于水平扩容能力和成本考虑,传统的强一致的解决方案(e,g 单机事务)纷纷被抛弃. 其理论依据就是响当当的<code>CAP</code>理论.往往为了可用性和分区容错性,忍痛放弃强一致支持,转而追求最终一致性.</p>
+<h4 id="目前分布式系统有哪些方向性的研究"><a href="#目前分布式系统有哪些方向性的研究" class="headerlink" title="目前分布式系统有哪些方向性的研究"></a>目前分布式系统有哪些方向性的研究</h4><p>总的来说,分布式系统要做的就是把多台机器有机的组合、连接起来,让其协同完成一件任务,可用是计算任务,也可以是存储任务.如果一定要给近些年的分布式系统研究做一个分类的话, 觉得可以包括三大部分:</p>
 <ul>
-<li>搭建一个测试环境,规划具体的环境,怎么配比<code>DRDS</code>与<code>RDS</code>等.</li>
-<li>环境规划好,进行相应的功能开发,建议能够看下这个产品的大部分文档,并且推荐看下<a href="https://bbs.aliyun.com/read/313990.html" target="_blank" rel="noopener">DRDS常见问题专用贴</a>,可以找到开发过程中遇到的相关问题的解答.</li>
-<li>功能开发完毕,对核心业务场景进行性能测试.</li>
-<li>实际生产使用,需要提供监控告警功能.目前<code>DRDS</code>控制台提供的监控和告警指标还不够丰富,可以查看提供的<a href="https://help.aliyun.com/document_detail/52139.html" target="_blank" rel="noopener">统计信息查询类语句</a>, 可以查看简书的一篇文章<a href="https://www.jianshu.com/p/854d34582ac4" target="_blank" rel="noopener">使用Grafana快速搭建DRDS秒级监控</a>.</li>
+<li>分布式存储系统</li>
+<li>分布式计算系统</li>
+<li>分布式管理系统</li>
 </ul>
-<p>此文参考简书文章<a href="https://www.jianshu.com/p/579236339c59" target="_blank" rel="noopener">DRDS应用开发指南</a></p>
 
       
 
@@ -214,7 +206,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">drds</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">分布式系统</a>
         		</li>
       		
 		</ul>
@@ -270,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yangchunmao.github.io/2018/05/01/阿里分布式数据库DRDS/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yangchunmao.github.io/2018/05/14/分布式系统初探/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,18 +276,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/02/lib64-libc-so-6-version-GLIBC-2-14-not-found/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          /lib64/libc.so.6: version `GLIBC_2.14` not found
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/20/docker初体验/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">docker初体验</div>
+    <a href="/2018/05/02/lib64-libc-so-6-version-GLIBC-2-14-not-found/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">/lib64/libc.so.6: version `GLIBC_2.14` not found</div>
       <i class="icon-circle-right"></i>
     </a>
   

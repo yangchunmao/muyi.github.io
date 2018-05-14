@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yangchunmao.github.io">
-  <title>阿里分布式数据库DRDS | 木易的博客</title>
+  <title>Tag: 分布式系统 | 木易的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="当前项目中随着业务量的增加,数据越来越多,单机的MySQL数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库DRDS.  提出问题 DRDS真正解决的核心问题是什么 DRDS通过什么样的方式解决单机数据库的扩张问题 如何选择拆分键 后续业务如何很好的应用DRDS">
-<meta name="keywords" content="drds">
-<meta property="og:type" content="article">
-<meta property="og:title" content="阿里分布式数据库DRDS">
-<meta property="og:url" content="https://yangchunmao.github.io/2018/05/01/阿里分布式数据库DRDS/index.html">
+  <meta name="description" content="一个叫木易的人的简单思考, 加油坚持!!!">
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+<meta property="og:type" content="website">
+<meta property="og:title" content="木易的博客">
+<meta property="og:url" content="https://yangchunmao.github.io/tags/分布式系统/index.html">
 <meta property="og:site_name" content="木易的博客">
-<meta property="og:description" content="当前项目中随着业务量的增加,数据越来越多,单机的MySQL数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库DRDS.  提出问题 DRDS真正解决的核心问题是什么 DRDS通过什么样的方式解决单机数据库的扩张问题 如何选择拆分键 后续业务如何很好的应用DRDS">
+<meta property="og:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-01T11:01:12.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="阿里分布式数据库DRDS">
-<meta name="twitter:description" content="当前项目中随着业务量的增加,数据越来越多,单机的MySQL数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库DRDS.  提出问题 DRDS真正解决的核心问题是什么 DRDS通过什么样的方式解决单机数据库的扩张问题 如何选择拆分键 后续业务如何很好的应用DRDS">
+<meta name="twitter:title" content="木易的博客">
+<meta name="twitter:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
   
     <link rel="alternative" href="/atom.xml" title="木易的博客" type="application/atom+xml">
   
@@ -149,186 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-阿里分布式数据库DRDS" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      阿里分布式数据库DRDS
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-drafts">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/05/14/分布式系统初探/" class="archive-article-date">
+  	<time datetime="2018-05-14T06:16:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/05/14/分布式系统初探/">分布式系统初探</a>
     </h1>
   
 
-        
-        <a href="/2018/05/01/阿里分布式数据库DRDS/" class="archive-article-date">
-  	<time datetime="2018-05-01T11:00:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>当前项目中随着业务量的增加,数据越来越多,单机的<code>MySQL</code>数据库中应对查询越来越慢,那如何来处理这种数据库的扩展性呢? 今天就来介绍下阿里分布式数据库<code>DRDS</code>.</p>
-</blockquote>
-<h4 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h4><ul>
-<li><code>DRDS</code>真正解决的核心问题是什么</li>
-<li><code>DRDS</code>通过什么样的方式解决单机数据库的扩张问题</li>
-<li>如何选择拆分键</li>
-<li>后续业务如何很好的应用<code>DRDS</code><a id="more"></a>
-</li>
-</ul>
-<h4 id="DRDS真正解决的核心问题"><a href="#DRDS真正解决的核心问题" class="headerlink" title="DRDS真正解决的核心问题"></a><code>DRDS</code>真正解决的核心问题</h4><p><code>DRDS</code>是一个数据库的中间件,专注于解决单机关系型数据库扩展性问题.</p>
-<h4 id="DRDS通过什么样的方式解决单机数据库的扩张问题"><a href="#DRDS通过什么样的方式解决单机数据库的扩张问题" class="headerlink" title="DRDS通过什么样的方式解决单机数据库的扩张问题"></a><code>DRDS</code>通过什么样的方式解决单机数据库的扩张问题</h4><p><code>DRDS</code>兼容<code>MySQL</code>协议和语法,支持分库分表、平滑扩容、服务升降配,透明读写分离和分布式事务等特性,具备分布式数据库全生命周期的运维管控能力.</p>
-<h4 id="如何选择拆分键"><a href="#如何选择拆分键" class="headerlink" title="如何选择拆分键"></a>如何选择拆分键</h4><p>数据库产品都是有坑的,只是坑大坑小,<code>DRDS</code>分布式数据库,更具体的关注点在如何选择拆分键?</p>
-<p>数据库拆分的首要原则,就是要尽可能找到数据表中的数据在业务逻辑上的主体,并确定大部分(或核心的)数据库操作都是围绕这个主体的数据进行,然后可使用该主体对应的字段作为拆分键,进行分库分表.</p>
-<p><code>DRDS</code>这个产品的表结构设计和单机数据库有一个很重要的区别在于: 怎么拆.所以推荐看下<a href="https://help.aliyun.com/document_detail/51309.html" target="_blank" rel="noopener">如何选择拆分键</a>这个文档.</p>
-<p>具体相关的知识可看一下视频:</p>
-<ul>
-<li>分布式数据库导论<video src="https://tbm.alicdn.com/2wCjSV1r9NHo5R3KfYW/STDbZ3LrlM9pBTFUW7c@@sd.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"><br>your browser does not support the video tag<br></video></li>
-<li>用好<code>DRDS</code>最重要的一些原则<video src="https://tbm.alicdn.com/2wCjSV1r9NHo5R3KfYW/4zgPKqXY3wLrRKRZfKc@@sd.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"><br>your browser does not support the video tag<br></video></li>
-<li><code>DRDS</code>8个基础实操实验<video src="https://tbm.alicdn.com/2wCjSV1r9NHo5R3KfYW/ZmsannHbj89LqdMirq4@@sd.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"><br>your browser does not support the video tag<br></video>
-
-</li>
-</ul>
-<p>这3个视频,我个人觉得还是值得花时间去观看,并且最后一个视频会比官方<a href="https://help.aliyun.com/document_detail/50067.html" target="_blank" rel="noopener">快速入门系列文档</a>更加有针对性.</p>
-<h4 id="后续业务如何很好的应用DRDS"><a href="#后续业务如何很好的应用DRDS" class="headerlink" title="后续业务如何很好的应用DRDS`"></a>后续业务如何很好的应用<code></code>DRDS`</h4><p>当你了解这个产品最重要的点之后,接下来就是要应用到具体的项目中,但是初次使用,我们需要安装具体的相关步骤来进行.</p>
-<ul>
-<li>搭建一个测试环境,规划具体的环境,怎么配比<code>DRDS</code>与<code>RDS</code>等.</li>
-<li>环境规划好,进行相应的功能开发,建议能够看下这个产品的大部分文档,并且推荐看下<a href="https://bbs.aliyun.com/read/313990.html" target="_blank" rel="noopener">DRDS常见问题专用贴</a>,可以找到开发过程中遇到的相关问题的解答.</li>
-<li>功能开发完毕,对核心业务场景进行性能测试.</li>
-<li>实际生产使用,需要提供监控告警功能.目前<code>DRDS</code>控制台提供的监控和告警指标还不够丰富,可以查看提供的<a href="https://help.aliyun.com/document_detail/52139.html" target="_blank" rel="noopener">统计信息查询类语句</a>, 可以查看简书的一篇文章<a href="https://www.jianshu.com/p/854d34582ac4" target="_blank" rel="noopener">使用Grafana快速搭建DRDS秒级监控</a>.</li>
-</ul>
-<p>此文参考简书文章<a href="https://www.jianshu.com/p/579236339c59" target="_blank" rel="noopener">DRDS应用开发指南</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">drds</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">分布式系统</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yangchunmao.github.io/2018/05/01/阿里分布式数据库DRDS/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/05/02/lib64-libc-so-6-version-GLIBC-2-14-not-found/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          /lib64/libc.so.6: version `GLIBC_2.14` not found
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/04/20/docker初体验/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">docker初体验</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -351,9 +224,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
