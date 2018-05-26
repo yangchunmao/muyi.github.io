@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yangchunmao.github.io">
-  <title>Tag: SVN | 木易的博客</title>
+  <title>数据库之一二三 | 木易的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个叫木易的人的简单思考, 加油坚持!!!">
-<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="木易的博客">
-<meta property="og:url" content="https://yangchunmao.github.io/tags/SVN/index.html">
+  <meta name="description" content="所有的存储都是为了后续的处理,目前数据处理大致可以分为OLTP和OLAP两类.分别来介绍这两类:">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库之一二三">
+<meta property="og:url" content="https://yangchunmao.github.io/2018/05/26/数据库之一二三/index.html">
 <meta property="og:site_name" content="木易的博客">
-<meta property="og:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
+<meta property="og:description" content="所有的存储都是为了后续的处理,目前数据处理大致可以分为OLTP和OLAP两类.分别来介绍这两类:">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-26T08:01:03.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="木易的博客">
-<meta name="twitter:description" content="一个叫木易的人的简单思考, 加油坚持!!!">
+<meta name="twitter:title" content="数据库之一二三">
+<meta name="twitter:description" content="所有的存储都是为了后续的处理,目前数据处理大致可以分为OLTP和OLAP两类.分别来介绍这两类:">
   
     <link rel="alternative" href="/atom.xml" title="木易的博客" type="application/atom+xml">
   
@@ -148,60 +149,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-数据库之一二三" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/14/SVN/" class="archive-article-date">
-  	<time datetime="2018-04-14T14:09:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/14/SVN/">SVN 版本控制</a>
+    <h1 class="article-title" itemprop="name">
+      数据库之一二三
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/26/数据库之一二三/" class="archive-article-date">
+  	<time datetime="2018-05-26T08:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>所有的存储都是为了后续的处理,目前数据处理大致可以分为<code>OLTP</code>和<code>OLAP</code>两类.分别来介绍这两类:</p>
+<a id="more"></a>
+<ul>
+<li><code>OLTP</code></li>
+</ul>
+<p><code>OLTP</code>英文全称为(On-Line Transaction Processiong), 联机事务处理.<code>OLTP</code>是传统的关系型数据库的主要应用,主要是基本的,日常的事务处理. 例如基本的银行交易.<br>所以<code>OLTP</code>系统强调数据库内存效率, 强调内存各种指标的命令率,强调绑定变量, 强调并发操作.<br>这种系统表示事务性非常高的系统, 一般都是高可用的在线系统, 以小的事务以及小的查询为主,评估其系统的时候, 一般看其每秒执行的<code>Transaction</code>以及<code>Execute SQL</code>的数量.</p>
+<p><code>OLTP</code>系统最容易出现瓶颈的地方就是<code>CPU</code>与磁盘子系统.</p>
+<ul>
+<li><code>CPU</code>出现瓶颈常表现在逻辑读总量与及计算性函数或者是过程上.优化的策略是减少单个语句的逻辑读,或者减少它们的执行次数; 并尽量避免计算过程.</li>
+<li>磁盘子系统在<code>OLTP</code>环境中, 它的承载能力一般取决于它的<code>IOPS</code>处理能力. 比较常用的设计与优化方式为<code>Cache</code>技术与<code>B-tree</code>索引技术.</li>
+</ul>
+<p><code>OLTP</code>系统是一个数据库变化非常频繁,<code>SQL</code>语句提交非常频繁的系统.对于数据块来说, 应尽可能让数据块保存在内存当中, 对于<code>SQL</code>来说, 尽可能使用变量绑定技术来达到<code>SQL</code>重用, 减少物理<code>I/O</code>和重复的<code>SQL</code>解析,从而极大的改善数据块的性能.</p>
+<ul>
+<li><code>OLAP</code></li>
+</ul>
+<p><code>OLAP</code>英文全称为(On-Line Analytical Processing),联机分析处理;<br><code>OLAP</code>是数据仓库系统的主要应用,支持复杂的分析操作, 侧重决策支持,并且提供直观易懂的查询结果. 此系统强调数据分析, 强调<code>SQL</code>执行计划,强调磁盘<code>I/O</code>, 强调分区等.</p>
+<p>在这样的系统中, 语句的执行量不是考核标准,因为一条语句的执行时间可能会非常长,读取的数据也非常多.所以,在这样的系统中,考核的标准往往是磁盘子系统的吞吐量(带宽), 如能到达多少MB/s的流量.</p>
+<p>梳理总结关系型数据设计规范</p>
+<ul>
+<li>数据库设计过程中使用PD工具</li>
+<li>开发过程中的规范和约定采用大一统的方式, 严格限制脱离中央管控的脚本或代码出现</li>
+<li>设计原则是尽可能粒度小, 容忍度高</li>
+<li>负责数据库设计工作的人应该是最懂项目, 最懂业务需求, 最有设计经验的人</li>
+<li>建议将<code>Mysql</code>数据库编码设置为<code>utf8</code>, <code>SqlServer</code>、<code>Oracle</code>可先采用默认设置,有需要则根据实际情况做相应变动.</li>
+<li>禁止使用存储过程, 触发器, 函数, 视图, 事件等高级功能</li>
+<li>数据库设计尽可能的遵循关系数据库范式</li>
+<li>设计过程中要考虑尽可能减少后面程序编写时查询的复杂度</li>
+<li>每张表必须有只用来标识唯一的主键,主键为UUID, 统一命名为id, 统一为char(32)类型</li>
+<li>现阶段暂时不考虑逻辑删除,仍旧使用物理删除</li>
+<li>对于中小型项目,数据库设计中无需过多的考虑性能,安全的问题</li>
+<li>不同的关系型数据库在字段类型的具体化上差异较多,但具体化的字段类型再多,无外乎这几种: 字符, 数字,日期,二进制</li>
+<li>表中应该尽可能避免可为NULL的列, 且尽可能显示设置默认值,尤其是被索引的列</li>
+<li>禁止使用float, double类型, 建议使用decimal替代</li>
+<li>统一命名为remark, 字段类型为varchar(200), 最多100个中文字符</li>
+<li>推荐统一使用int(10)做为所有表中的排序字段类型</li>
+<li>对于表的注释,要求简单明了, 先说明表中文名称,句号分隔, 然后跟功能说明,无需特别说明的,则只说明中文名称即可.</li>
+<li>五种约束类型: 唯一性和主键约束, 外键约束, 检查约束, 空值约束,默认值约束; 对应五大关键词, <code>UNIQUE</code>和<code>Primary Key</code>, <code>CHECK</code>, <code>NOT NULL</code>, <code>DEFAULT</code>. 本规范中要求, 除检查约束外, 其余四种都要在数据库中加强约束,同时,程序也会根据数据库中的约束的设置做相应处理.</li>
+<li>当数据量达到一定程度,仅通过程序优化对性能提升有限时, 可以考虑同时对数据库进行调校,这是会优先考虑建立索引.提到的几个注意点: 索引外键,索引经常<code>group by</code>, <code>order by</code>的字段,不要索引blob/text字段, 不要索引小型表, 索引多了影响插入删除速度,在条件表达式中经常用到的不同值较多的列上建立检索.</li>
+<li>对于并发编程目前唯一可行的方法,还是在数据库中加入一个锁标识字段</li>
+<li>优化操作日志(OperationLog)表的设计和存储(优先考虑HBASE或OB), 来代替单独历史表的设计</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yangchunmao.github.io/2018/05/26/数据库之一二三/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/05/14/分布式系统初探/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">分布式系统初探</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -224,9 +351,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
